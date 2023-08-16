@@ -1,3 +1,36 @@
-<h1>Restaurants#show</h1>
-<p>Find me in app/views/restaurants/show.html.erb</p>
+<p style="color: green"><%= notice %></p>
 
+<%= render @restaurant %>
+
+<div>
+  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+  <%= link_to "Back to restaurants", restaurants_path %>
+
+  <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+  <%# <%= link_to "Review this Restaurant", new_restaurant_review_path(@restaurant)  %>
+</div>
+
+<h1 class="mt-5">Create a review</h1>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+   <%= f.error_notification %>
+ <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+   <div class="form-inputs">
+    <%= f.input :content %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+   </div>
+<% end %>
+
+
+
+<h1 class="mt-5">Reviews</h1>
+
+<% @restaurant.reviews.each do |review| %>
+  <h5><%= review.content %></h5>
+  <h5><%= link_to "Destroy Review", review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></h5>
+<% end %>
