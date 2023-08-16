@@ -1,24 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @restaurant %>
-
-<div>
-  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
-  <%= link_to "Back to restaurants", restaurants_path %>
-
-  <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
-  <%# <%= link_to "Review this Restaurant", new_restaurant_review_path(@restaurant)  %>
+<div class="card text-bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Restaurant</div>
+  <div class="card-body">
+    <h5 class="card-title">Info card title
+    </h5>
+    <p class="card-text">
+    <%= render @restaurant %>
+      <div>
+        <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+        <%= link_to "Back to restaurants", restaurants_path %>
+        <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+        <%# <%= link_to "Review this Restaurant", new_restaurant_review_path(@restaurant)  %>
+      </div>
+    </p>
+  </div>
 </div>
 
 <h1 class="mt-5">Create a review</h1>
-
 <%= simple_form_for [@restaurant, @review] do |f| %>
-   <%= f.error_notification %>
- <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
    <div class="form-inputs">
     <%= f.input :content %>
-
   </div>
 
   <div class="form-actions">
